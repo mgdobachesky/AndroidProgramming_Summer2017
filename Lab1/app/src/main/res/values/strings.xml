@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lab1</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="chocolate_types">
+        <item>Dark Chocolate</item>
+        <item>Milk Chocolate</item>
+        <item>Light Chocolate</item>
+    </string-array>
+</resources>
