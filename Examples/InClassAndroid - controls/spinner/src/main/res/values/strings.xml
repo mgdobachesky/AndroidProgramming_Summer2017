@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Spinner</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+ <string-array name="icecream_flavors">
+       <item>Chocolate</item>
+       <item>Vanilla</item>
+       <item>Strawberry</item>
+       <item>Rocky Road</item>
+ </string-array>
+ <string name="SelectAFlavor">Select A Flavor</string>
+</resources>

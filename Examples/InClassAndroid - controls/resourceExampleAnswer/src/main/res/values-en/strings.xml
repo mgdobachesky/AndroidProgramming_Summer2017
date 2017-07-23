@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Attempts">Attempts</string>
+    <string name="Completions">Completions</string>
+    <string name="Yards">Yards</string>
+    <string name="Interceptions">Interceptions</string>
+    <string name="Touchdowns">Touchdowns</string>
+    <string name="Calculate">Calculate</string>
+</resources>
