@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtURL" />
+
+    <Button android:id="@+id/start_browser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_browser"/>
+
+    <Button android:id="@+id/start_phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_phone" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send_email"
+        android:id="@+id/SendEmail" />
+
+</LinearLayout>

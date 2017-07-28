@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/WeekTwo_InClass.iml" filepath="$PROJECT_DIR$/WeekTwo_InClass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/implicitintent/implicitintent.iml" filepath="$PROJECT_DIR$/implicitintent/implicitintent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intentpractice/intentpractice.iml" filepath="$PROJECT_DIR$/intentpractice/intentpractice.iml" />
+    </modules>
+  </component>
+</project>
