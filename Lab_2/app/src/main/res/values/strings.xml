@@ -3,10 +3,4 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_result">ResultActivity</string>
 
-    <string name="chocolate_prompt">Select Chocolate</string>
-    <string-array name="chocolate_types">
-        <item>Dark Chocolate</item>
-        <item>Milk Chocolate</item>
-        <item>Light Chocolate</item>
-    </string-array>
 </resources>

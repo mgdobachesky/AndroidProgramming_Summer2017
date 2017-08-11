@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.a001264912.menulab.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_new"
+        android:orderInCategory="100"
+        android:title="NEW"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_toast"
+        android:orderInCategory="100"
+        android:title="Toast"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_long"
+        android:orderInCategory="100"
+        android:title="A really long menu name that will be in overflow"
+        app:showAsAction="ifRoom" />
+</menu>

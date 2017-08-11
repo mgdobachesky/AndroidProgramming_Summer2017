@@ -1,7 +1,7 @@
-package com.example.a001264912.lab_2;
+package com.example.a001264912.lab3;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,23 +12,23 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.view.View.OnClickListener;
-import android.widget.Toast;
-
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.View.OnClickListener;
+import android.widget.Toast;
+
 import static android.R.attr.value;
+import static android.R.id.list;
 
 public class MainActivity extends AppCompatActivity {
-    // Set request code
-    private static final int REQUEST_CODE = 10;
 
-    // Set initial controls
     private EditText firstName;
     private EditText lastName;
     private Spinner chocolateType;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton shippingMethod;
     private Button saveOrder;
     private TextView displayResults;
+    private ArrayList<Order> chocolateOrder = new ArrayList<Order>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         saveOrder.setOnClickListener(ResultClickListener);
     }
 
-    private View.OnClickListener ResultClickListener = new View.OnClickListener() {
+    private OnClickListener ResultClickListener = new OnClickListener() {
         @Override
         public void onClick(View view) {
             // Create new order to work with
@@ -98,23 +99,13 @@ public class MainActivity extends AppCompatActivity {
                 newOrder.setExpeditedShipping(false);
             }
 
-            Intent i = new Intent(getApplicationContext(), com.example.a001264912.lab_2.ResultActivity.class);
-            i.putExtra("chocolateOrder", newOrder);
-            startActivityForResult(i, REQUEST_CODE);
+            // Add order to list of orders
+            chocolateOrder.add(newOrder);
+
+            // Print acknowledgement message
+            displayResults.setText("Order added, there are now " + chocolateOrder.size() + " orders.");
         }
     };
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Get data from ForResult activity and use it in this activity
-        if(resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            if (data.hasExtra("numberOfOrders")) {
-                String numberOfOrders = data.getExtras().getString("numberOfOrders");
-                displayResults.setText("Number Of Orders = " + numberOfOrders);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,6 +124,66 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if(id == R.id.action_new || id == R.id.action_new2) {
+            // Get the controls to be cleared
+            firstName = (EditText)findViewById(R.id.txtFirstName);
+            lastName = (EditText)findViewById(R.id.txtLastName);
+            chocolateType = (Spinner)findViewById(R.id.spnChocolateType);
+            numBars = (EditText)findViewById(R.id.txtNumBars);
+            shippingGroup = (RadioGroup)findViewById(R.id.rdgShipping);
+            displayResults = (TextView)findViewById(R.id.lblDisplayResults);
+
+            // Clear each control
+            firstName.setText("");
+            lastName.setText("");
+            chocolateType.setSelection(0);
+            numBars.setText("");
+            shippingGroup.clearCheck();
+            displayResults.setText("");
+
+        } else if(id == R.id.action_doubleOrder) {
+            // Get value number of chocolate bars in order and double it
+            int barValue = 0;
+            numBars = (EditText)findViewById(R.id.txtNumBars);
+            barValue = Integer.parseInt(numBars.getText().toString());
+            barValue = barValue * 2;
+            numBars.setText(Integer.toString(barValue));
+
+        } else if(id == R.id.action_getFirstOrder) {
+            // Initialize variables
+            int selectedChocolateType = 0;
+            int selectedShippingType = 0;
+
+            // Get controls to be set to the values in first order
+            firstName = (EditText)findViewById(R.id.txtFirstName);
+            lastName = (EditText)findViewById(R.id.txtLastName);
+            chocolateType = (Spinner)findViewById(R.id.spnChocolateType);
+            numBars = (EditText)findViewById(R.id.txtNumBars);
+            shippingGroup = (RadioGroup)findViewById(R.id.rdgShipping);
+            displayResults = (TextView)findViewById(R.id.lblDisplayResults);
+
+            // Get first order in ArrayList
+            Order firstOrder = chocolateOrder.get(0);
+
+            // Create adapter to use in getting first order's selected spinner item
+            ArrayAdapter<String> spinnerAdapter = (ArrayAdapter<String>)chocolateType.getAdapter();
+            // Get position of the first order's selected spinner item
+            selectedChocolateType = spinnerAdapter.getPosition(firstOrder.getChocolateType());
+
+            // Get position of selected radio button
+            if(firstOrder.isExpeditedShipping()) {
+                selectedShippingType = R.id.rdoShipExpedited;
+            } else if(!firstOrder.isExpeditedShipping()) {
+                selectedShippingType = R.id.rdoShipNormal;
+            }
+
+            // Set the items selected to be that of the first order
+            firstName.setText(firstOrder.getFirstName());
+            lastName.setText(firstOrder.getLastName());
+            chocolateType.setSelection(selectedChocolateType);
+            numBars.setText(Integer.toString(firstOrder.getChocolateQuantity()));
+            shippingGroup.check(selectedShippingType);
+            displayResults.setText("");
         }
 
         return super.onOptionsItemSelected(item);
