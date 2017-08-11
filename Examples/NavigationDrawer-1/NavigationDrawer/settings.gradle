@@ -1,0 +1,2 @@
+include ':app', ':buildnavigationdrawerfromscratch'
+project(':buildnavigationdrawerfromscratch').projectDir = new File('navigationdrawerfromscratch')

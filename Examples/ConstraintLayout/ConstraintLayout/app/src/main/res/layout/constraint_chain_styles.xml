@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/label_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/label_b"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:text="A"
+        tools:layout_editor_absoluteX="175dp" />
+
+    <TextView
+        android:id="@+id/label_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/label_a"
+        app:layout_constraintEnd_toStartOf="@+id/label_c"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="B"
+        tools:layout_editor_absoluteX="184dp" />
+
+    <TextView
+        android:id="@+id/label_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/label_b"
+        app:layout_constraintEnd_toStartOf="@+id/label_d"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="C"
+        tools:layout_editor_absoluteX="192dp" />
+
+    <TextView
+        android:id="@+id/label_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/label_c"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="D"
+        tools:layout_editor_absoluteX="201dp" />
+
+    <TextView
+        android:id="@+id/label_e"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/label_f"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toBottomOf="@id/label_a"
+        android:text="E"
+        tools:layout_editor_absoluteX="400dp" />
+
+    <TextView
+        android:id="@+id/label_f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/label_e"
+        app:layout_constraintEnd_toStartOf="@+id/label_g"
+
+        app:layout_constraintTop_toTopOf="@id/label_e"
+        android:text="F"
+        tools:layout_editor_absoluteX="184dp" />
+
+    <TextView
+        android:id="@+id/label_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/label_f"
+        app:layout_constraintEnd_toStartOf="@+id/label_h"
+        app:layout_constraintTop_toTopOf="@id/label_e"
+        android:text="G"
+        tools:layout_editor_absoluteX="192dp" />
+
+    <TextView
+        android:id="@+id/label_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/label_g"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_e"
+        android:text="H"
+        tools:layout_editor_absoluteX="201dp" />
+
+
+</android.support.constraint.ConstraintLayout>
