@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AdvancedSQLLiteDB/AdvancedSQLLiteDB.iml" filepath="$PROJECT_DIR$/AdvancedSQLLiteDB/AdvancedSQLLiteDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SQLLiteExamples.iml" filepath="$PROJECT_DIR$/SQLLiteExamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleListView/SimpleListView.iml" filepath="$PROJECT_DIR$/SimpleListView/SimpleListView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sampledb/sampledb.iml" filepath="$PROJECT_DIR$/sampledb/sampledb.iml" />
+    </modules>
+  </component>
+</project>
