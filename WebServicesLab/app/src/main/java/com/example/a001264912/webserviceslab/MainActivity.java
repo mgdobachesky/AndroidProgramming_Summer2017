@@ -80,15 +80,11 @@ public class MainActivity extends AppCompatActivity {
     private class WebOperation  extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            String resultOfCall = "test";
+            String resultOfCall = "";
             try {
-
                 String Word;
-
                 Word = params[0];
 
-                // This won't work because you need to pull components from the main thread
-                //resultOfCall = GetWeatherInfo(City.getText().toString(), Country.getText().toString());
                 resultOfCall = SendDefinitionCall(Word);
             } catch (IOException e) {
                 Log.e("Allied Error", "Foo didn't work: " + e.getMessage());
@@ -97,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Allied Error", "Foo didn't work: " + e.getMessage());
                 Log.e("Allied Error2", "Full stack track:" + Log.getStackTraceString(e));
             }
-            //    result.setText(resultOfCall);
 
             return resultOfCall;
         }
@@ -105,7 +100,9 @@ public class MainActivity extends AppCompatActivity {
             lblResult.setText(ResultOfCall);
         }
     }
+
     public void GetDefinition(View view){
+
         // Use AsyncTask execute Method To Prevent ANR Problem
         String requestedWord;
 
@@ -115,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private String SendDefinitionCall(String Word) throws IOException, XmlPullParserException{
+    private String SendDefinitionCall(String Word) throws IOException, XmlPullParserException {
 
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
@@ -125,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
         WordProp.setNamespace(NAMESPACE);
         WordProp.setValue(Word);
         request.addProperty(WordProp);
-
-        // this works too
-        //request.addProperty("AnnualInsurance",AnnualInsurance);
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.dotNet = true;
@@ -140,11 +134,9 @@ public class MainActivity extends AppCompatActivity {
         ht.debug = true;
         ht.call(SOAP_ACTION, envelope);
 
-
         String returnWord;
         SoapObject definitions;
         StringBuffer str = new StringBuffer();
-
 
         //final  SoapPrimitive response = (SoapPrimitive)envelope.getResponse();
         SoapObject response = (SoapObject)envelope.getResponse();
