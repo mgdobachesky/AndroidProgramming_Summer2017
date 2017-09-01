@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/WebServices.iml" filepath="$PROJECT_DIR$/WebServices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsonapplication/jsonapplication.iml" filepath="$PROJECT_DIR$/jsonapplication/jsonapplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsongetapplication/jsongetapplication.iml" filepath="$PROJECT_DIR$/jsongetapplication/jsongetapplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsongetapplicationnew/jsongetapplicationnew.iml" filepath="$PROJECT_DIR$/jsongetapplicationnew/jsongetapplicationnew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mortagepayment/mortagepayment.iml" filepath="$PROJECT_DIR$/mortagepayment/mortagepayment.iml" />
+    </modules>
+  </component>
+</project>

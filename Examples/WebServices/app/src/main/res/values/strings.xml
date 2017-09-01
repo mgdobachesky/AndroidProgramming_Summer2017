@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SoapWebService</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="GetWeather">Get Weather</string>
+    <string name="ZipCode">ZipCode</string>
+    <string name="City">City</string>
+    <string name="Country">Country</string>
+</resources>

@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.a001264912.menulab.MainActivity">
+    tools:context="com.example.a001264912.lab3.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -10,16 +10,23 @@
     <item
         android:id="@+id/action_new"
         android:orderInCategory="100"
-        android:title="NEW"
-        app:showAsAction="ifRoom" />
+        android:title="New"
+        android:icon="@drawable/ic_autorenew_black_24dp"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/action_toast"
+        android:id="@+id/action_doubleOrder"
         android:orderInCategory="100"
-        android:title="Toast"
-        app:showAsAction="ifRoom" />
+        android:title="Double Order"
+        android:icon="@drawable/ic_autorenew_black_24dp"
+        app:showAsAction="never" />
     <item
-        android:id="@+id/action_long"
+        android:id="@+id/action_new2"
         android:orderInCategory="100"
-        android:title="A really long menu name that will be in overflow"
-        app:showAsAction="ifRoom" />
+        android:title="New"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_getFirstOrder"
+        android:orderInCategory="100"
+        android:title="Get First Order"
+        app:showAsAction="never" />
 </menu>

@@ -69,40 +69,49 @@ public class ImageDetails extends AppCompatActivity implements AsyncResponse {
     @Override
     public void processFinish(VisualClassification imageClassifiers) {
         try {
+            // Get the JSON response
             JSONObject jsonObject = new JSONObject(imageClassifiers.toString());
-            String isError = jsonObject.optJSONArray("images").optJSONObject(0).optString("error");
 
-            if (isError != "") {
-                lblImageDetails.setText("Error analyzing image.");
-            } else {
-                JSONArray jsonData = jsonObject.getJSONArray("images").getJSONObject(0).getJSONArray("classifiers").getJSONObject(0).getJSONArray("classes");
+            // Continue only if the json object is not null
+            if(!jsonObject.isNull("images")){
 
-                StringBuffer imageBuffer = new StringBuffer();
+                // Check to see if there is an error in the JSON response
+                String isError = jsonObject.optJSONArray("images").optJSONObject(0).optString("error");
 
-                for (int i = 0; i < jsonData.length(); i++) {
-                    JSONObject imageDetails = jsonData.getJSONObject(i);
-                    String imageClass = imageDetails.getString("class");
-                    String imageTypeHierarchy = imageDetails.optString("type_hierarchy");
-                    String imageScore = imageDetails.optString("score");
+                // Continue if there was no error
+                if (isError == "") {
+                    JSONArray jsonData = jsonObject.getJSONArray("images").getJSONObject(0).getJSONArray("classifiers").getJSONObject(0).getJSONArray("classes");
 
-                    imageBuffer.append("Definition Number ");
-                    imageBuffer.append(i + 1);
-                    imageBuffer.append("\n");
-                    imageBuffer.append("Class: ");
-                    imageBuffer.append(imageClass);
-                    imageBuffer.append("\n");
-                    imageBuffer.append("Score: ");
-                    imageBuffer.append(imageScore);
-                    imageBuffer.append("\n");
-                    if (!imageTypeHierarchy.isEmpty()) {
-                        imageBuffer.append("Type Hierarchy: ");
-                        imageBuffer.append(imageTypeHierarchy);
+                    StringBuffer imageBuffer = new StringBuffer();
+
+                    for (int i = 0; i < jsonData.length(); i++) {
+                        JSONObject imageDetails = jsonData.getJSONObject(i);
+                        String imageClass = imageDetails.getString("class");
+                        String imageTypeHierarchy = imageDetails.optString("type_hierarchy");
+                        String imageScore = imageDetails.optString("score");
+
+                        imageBuffer.append("Definition Number ");
+                        imageBuffer.append(i + 1);
+                        imageBuffer.append("\n");
+                        imageBuffer.append("Class: ");
+                        imageBuffer.append(imageClass);
+                        imageBuffer.append("\n");
+                        imageBuffer.append("Score: ");
+                        imageBuffer.append(imageScore);
+                        imageBuffer.append("\n");
+                        if (!imageTypeHierarchy.isEmpty()) {
+                            imageBuffer.append("Type Hierarchy: ");
+                            imageBuffer.append(imageTypeHierarchy);
+                            imageBuffer.append("\n");
+                        }
                         imageBuffer.append("\n");
                     }
-                    imageBuffer.append("\n");
+                    lblImageDetails.setText(imageBuffer);
+                } else {
+                    lblImageDetails.setText("Error analyzing image.");
                 }
-                lblImageDetails.setText(imageBuffer);
             }
+
         } catch(JSONException e){
             // Handle JSONException
         }
