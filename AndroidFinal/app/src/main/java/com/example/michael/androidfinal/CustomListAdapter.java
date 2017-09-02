@@ -24,9 +24,9 @@ import java.net.URI;
 
 public class CustomListAdapter extends ArrayAdapter<String> {
 
-    private final Activity context;
-    private  final String[] itemName;
-    private final Uri[] imgUri;
+    private Activity context;
+    private String[] itemName;
+    private Uri[] imgUri;
     private AdapterCallback mAdapterCallback;
 
     public CustomListAdapter(Activity context, String[] itemName, Uri[] imgUri) {
@@ -43,16 +43,28 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     }
 
     public View getView(final int position, View view, final ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.mylist, null, true);
-        TextView txtTitle = (TextView)rowView.findViewById(R.id.txtListName);
-        ImageView imageView = (ImageView)rowView.findViewById(R.id.imgListIcon);
-        final ImageView deleteImage = (ImageView)rowView.findViewById(R.id.imgListDelete);
+        View rowView = view;
+        ItemInformationHolder holder = null;
 
-        txtTitle.setText(itemName[position]);
-        imageView.setImageBitmap(scaleImage(imgUri[position]));
+        if(rowView == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            rowView = inflater.inflate(R.layout.mylist, null, true);
 
-        deleteImage.setOnClickListener(new View.OnClickListener() {
+            holder = new ItemInformationHolder();
+            holder.txtTitle = (TextView) rowView.findViewById(R.id.txtListName);
+            holder.imageView = (ImageView) rowView.findViewById(R.id.imgListIcon);
+            holder.deleteImage = (ImageView) rowView.findViewById(R.id.imgListDelete);
+
+            rowView.setTag(holder);
+        } else {
+            holder = (ItemInformationHolder) rowView.getTag();
+        }
+
+        holder.txtTitle.setText(itemName[position]);
+        Bitmap bitmap = ScaleImage.scaleImage(imgUri[position], 64, 64);
+        holder.imageView.setImageBitmap(bitmap);
+
+        holder.deleteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -66,27 +78,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 
-    private Bitmap scaleImage(Uri imageUri) {
-        // Get the dimensions of the View
-        int targetW = 64;
-        int targetH = 64;
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(imageUri.getPath(), bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), bmOptions);
-        return bitmap;
+    static class ItemInformationHolder {
+        TextView txtTitle;
+        ImageView imageView;
+        ImageView deleteImage;
     }
 
     public interface AdapterCallback {

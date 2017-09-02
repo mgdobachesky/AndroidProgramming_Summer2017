@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements CustomListAdapter
             if(photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this, "com.example.michael.androidfinal", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                //takePictureIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 2_000_000);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }

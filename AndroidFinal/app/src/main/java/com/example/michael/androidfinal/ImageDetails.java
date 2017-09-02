@@ -3,6 +3,7 @@ package com.example.michael.androidfinal;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,7 +31,7 @@ import java.util.List;
 
 import static com.ibm.watson.developer_cloud.http.HttpMediaType.JSON;
 
-public class ImageDetails extends AppCompatActivity implements AsyncResponse {
+public class ImageDetails extends AppCompatActivity {
 
     // Define controls (global)
     ImageView imgImageForDetails;
@@ -56,37 +57,78 @@ public class ImageDetails extends AppCompatActivity implements AsyncResponse {
         Bundle extra = this.getIntent().getExtras();
         filePath = extra.getString("picturePath");
 
+        // Get Display Metrics
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels/3;
+        int width = displayMetrics.widthPixels/3;
+
         // Set the image to be the selected image
-        imgImageForDetails.setImageBitmap(scaleImage(Uri.parse(filePath)));
+        Bitmap bitmap = ScaleImage.scaleImage(Uri.parse(filePath), width, height);
+        imgImageForDetails.setImageBitmap(bitmap);
 
         // Set delegate for async task to be this
         // so the method of this class will run.
         // Then execute the async task
-        recognizeImage.delegate = this;
         recognizeImage.execute(filePath);
     }
 
-    @Override
-    public void processFinish(VisualClassification imageClassifiers) {
-        try {
-            // Get the JSON response
-            JSONObject jsonObject = new JSONObject(imageClassifiers.toString());
+    private class RecognizeImage extends AsyncTask<String, Void, Void> {
 
-            // Continue only if the json object is not null
-            if(!jsonObject.isNull("images")){
+        private String error = null;
+        private String content;
 
-                // Check to see if there is an error in the JSON response
-                String isError = jsonObject.optJSONArray("images").optJSONObject(0).optString("error");
+        @Override
+        protected void onPreExecute() {
+            lblImageDetails.setText("Fetching data, please wait...");
+        }
 
-                // Continue if there was no error
-                if (isError == "") {
-                    JSONArray jsonData = jsonObject.getJSONArray("images").getJSONObject(0).getJSONArray("classifiers").getJSONObject(0).getJSONArray("classes");
+        @Override
+        protected Void doInBackground(String... filePath) {
+            try {
+                // Instantiate the service and set the API key
+                VisualRecognition service = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
+                service.setApiKey("{api-key}");
 
+                // Check if the image is small enough for the API to process
+                File picture = new File(filePath[0]);
+                long pictureLength = picture.length();
+                if(pictureLength >= 2097152) {
+                    error = "Image size limit exceeded.";
+                }
+
+                ClassifyImagesOptions options = new ClassifyImagesOptions.Builder()
+                        .images(picture)
+                        .build();
+                VisualClassification response = service.classify(options).execute();
+                content = response.toString();
+            } catch(Exception ex) {
+                error = ex.getMessage();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            if(error != null) {
+                lblImageDetails.setText("ERROR: " + error);
+            } else {
+                String outputData = "";
+                JSONObject jsonResponse;
+
+                try {
+                    // Get the JSON response
+                    jsonResponse = new JSONObject(content);
+
+                    // Handle main json data
+                    JSONArray jsonMainNode = jsonResponse.optJSONArray("images").optJSONObject(0).optJSONArray("classifiers").optJSONObject(0).optJSONArray("classes");
+                    int jsonLength = jsonMainNode.length();
+
+                    // Handle each piece of data
                     StringBuffer imageBuffer = new StringBuffer();
-
-                    for (int i = 0; i < jsonData.length(); i++) {
-                        JSONObject imageDetails = jsonData.getJSONObject(i);
-                        String imageClass = imageDetails.getString("class");
+                    for(int i = 0; i < jsonLength; i++) {
+                        JSONObject imageDetails = jsonMainNode.getJSONObject(i);
+                        String imageClass = imageDetails.optString("class");
                         String imageTypeHierarchy = imageDetails.optString("type_hierarchy");
                         String imageScore = imageDetails.optString("score");
 
@@ -106,42 +148,15 @@ public class ImageDetails extends AppCompatActivity implements AsyncResponse {
                         }
                         imageBuffer.append("\n");
                     }
+
+                    // Set image details
                     lblImageDetails.setText(imageBuffer);
-                } else {
+                } catch(JSONException ex) {
                     lblImageDetails.setText("Error analyzing image.");
+                    //ex.printStackTrace();
                 }
             }
-
-        } catch(JSONException e){
-            // Handle JSONException
         }
     }
 
-    private Bitmap scaleImage(Uri imageUri) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        // Get the dimensions of the View
-        int targetW = height/4;
-        int targetH = width/4;
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(imageUri.getPath(), bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), bmOptions);
-        return bitmap;
-    }
 }
