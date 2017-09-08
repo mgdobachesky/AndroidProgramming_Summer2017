@@ -10,9 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.a001264912.fragmentlab.dummy.DummyContent;
-import com.example.a001264912.fragmentlab.dummy.DummyContent.DummyItem;
-
 import java.util.List;
 
 /**

@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OrderFragment.OnF
     }
 
     @Override
-    public void onFragmentInteraction(Order item) {
+    public void onFragmentInteraction() {
         Toast.makeText(this, Integer.toString(CandyOrders.size()), Toast.LENGTH_LONG).show();
     }
 }

@@ -41,8 +41,6 @@ public class OrderFragment extends Fragment {
     private RadioGroup shippingGroup;
     private RadioButton shippingMethod;
     private Button saveOrder;
-    private TextView displayResults;
-    private ArrayList<Order> chocolateOrder = new ArrayList<Order>();
 
 
     // TODO: Rename and change types of parameters
@@ -85,14 +83,16 @@ public class OrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Copy the view
         view = inflater.inflate(R.layout.fragment_order, container, false);
+
+        // Initialize views
         firstName = (EditText)view.findViewById(R.id.txtFirstName);
         lastName = (EditText)view.findViewById(R.id.txtLastName);
         chocolateType = (Spinner)view.findViewById(R.id.spnChocolateType);
         numBars = (EditText)view.findViewById(R.id.txtNumBars);
         shippingGroup = (RadioGroup)view.findViewById(R.id.rdgShipping);
         saveOrder = (Button)view.findViewById(R.id.btnSaveOrder);
-        displayResults = (TextView)view.findViewById(R.id.lblDisplayResults);
 
         // Create list to hold spinner items
         List<String> spinnerItems = new ArrayList<String>();
@@ -113,9 +113,9 @@ public class OrderFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Order order) {
+    public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onFragmentInteraction(order);
+            mListener.onFragmentInteraction();
         }
     }
 
@@ -147,7 +147,6 @@ public class OrderFragment extends Fragment {
         chocolateType = (Spinner)view.findViewById(R.id.spnChocolateType);
         numBars = (EditText)view.findViewById(R.id.txtNumBars);
         shippingGroup = (RadioGroup)view.findViewById(R.id.rdgShipping);
-        displayResults = (TextView)view.findViewById(R.id.lblDisplayResults);
 
         // Create adapter to use in getting first order's selected spinner item
         ArrayAdapter<String> spinnerAdapter = (ArrayAdapter<String>)chocolateType.getAdapter();
@@ -167,7 +166,6 @@ public class OrderFragment extends Fragment {
         chocolateType.setSelection(selectedChocolateType);
         numBars.setText(Integer.toString(data.getChocolateQuantity()));
         shippingGroup.check(selectedShippingType);
-        displayResults.setText("");
     }
 
     private View.OnClickListener SubmitClickListener = new View.OnClickListener() {
@@ -191,15 +189,11 @@ public class OrderFragment extends Fragment {
                 newOrder.setExpeditedShipping(false);
             }
 
-            // Add order to list of orders
-            chocolateOrder.add(newOrder);
-
-            // Print acknowledgement message
-            displayResults.setText("Order added, there are now " + chocolateOrder.size() + " orders.");
-
+            // Add order
             MainActivity.CandyOrders.add(newOrder);
 
-            onButtonPressed(newOrder);
+            // Call event handler
+            onButtonPressed();
         }
     };
 
@@ -215,6 +209,6 @@ public class OrderFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Order order);
+        void onFragmentInteraction();
     }
 }
