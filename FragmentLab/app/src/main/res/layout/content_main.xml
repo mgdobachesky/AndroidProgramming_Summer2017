@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <fragment
+        android:id="@+id/frgOrder"
+        android:name="com.example.a001264912.fragmentlab.OrderFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_order"
+        android:layout_marginTop="60dp"/>
+
+    <fragment
+        android:id="@+id/frgOrderList"
+        android:name="com.example.a001264912.fragmentlab.OrderListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frgOrder"
+        tools:layout="@layout/fragment_orderlist_list" />
+</android.support.constraint.ConstraintLayout>

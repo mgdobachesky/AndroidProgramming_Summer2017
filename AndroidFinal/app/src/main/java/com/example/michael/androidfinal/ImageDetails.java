@@ -127,7 +127,7 @@ public class ImageDetails extends AppCompatActivity {
                     // Handle each piece of data
                     StringBuffer imageBuffer = new StringBuffer();
                     for(int i = 0; i < jsonLength; i++) {
-                        JSONObject imageDetails = jsonMainNode.getJSONObject(i);
+                        JSONObject imageDetails = jsonMainNode.optJSONObject(i);
                         String imageClass = imageDetails.optString("class");
                         String imageTypeHierarchy = imageDetails.optString("type_hierarchy");
                         String imageScore = imageDetails.optString("score");

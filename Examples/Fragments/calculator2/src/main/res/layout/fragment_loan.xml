@@ -1,0 +1,62 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".LoanFragment" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/labelLoanCalculator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:text="@string/loanCalculator" />
+
+        <EditText
+            android:id="@+id/principalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/labelLoanCalculator"
+            android:hint="@string/principalAmountHint"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/term"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/principalAmount"
+            android:hint="@string/termHint"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/interest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/term"
+            android:hint="@string/interestHint"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/loanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/interest"
+            android:text="@string/loanButtonText" />
+
+        <TextView
+            android:id="@+id/loanResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loanButton"
+            android:text="@string/loanResultLabel" />
+    </RelativeLayout>
+</ScrollView>

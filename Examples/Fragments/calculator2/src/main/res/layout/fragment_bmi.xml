@@ -1,0 +1,41 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BMIFragment" >
+    <TextView
+        android:id="@+id/labelBodyMassIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:text="@string/bodyMassIndex" />
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/labelBodyMassIndex"
+        android:hint="@string/weightHint"
+        android:inputType="numberDecimal" />
+    <EditText
+        android:id="@+id/height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weight"
+        android:hint="@string/heightHint"
+        android:inputType="numberDecimal" />
+    <Button
+        android:id="@+id/bmiButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/height"
+        android:text="@string/bmiButtonText" />
+    <TextView
+        android:id="@+id/bmiResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bmiButton"
+        android:text="@string/bmiResultLabel" />
+</RelativeLayout>

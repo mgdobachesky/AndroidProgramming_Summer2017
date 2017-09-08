@@ -1,0 +1,21 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <Button
+            android:id="@+id/tipCalculatorButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tipCalculator" />
+        <Button
+            android:id="@+id/bmiCalculatorButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bodyMassIndex" />
+    </LinearLayout>
+</ScrollView>

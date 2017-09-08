@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Calculator</string>
+    <!-- Tip Calculator -->
+    <string name="tipCalculator">Tip Calculator</string>
+    <string name="bill_amount_hint">Bill Amount</string>
+    <string name="tip_percent_hint">Tip Percent</string>
+    <string name="ten">10%</string>
+    <string name="fifteen">15%</string>
+    <string name="eighteen">18%</string>
+    <string name="twenty">20%</string>
+    <string name="tip_amount_label">Tip Amount:</string>
+    <string name="tip_amount_label2">Tip Amount: $%1$.2f</string>
+    <string name="total_bill_label">Total Bill:</string>
+    <string name="total_bill_label2">Total Bill: $%1$.2f</string>
+
+    <!-- BMI -->
+    <string name="bodyMassIndex">Body Mass Index Calculator</string>
+    <string name="weightHint">Weight in Pounds</string>
+    <string name="heightHint">Height in Inches</string>
+    <string name="bmiButtonText">Compute BMI</string>
+    <string name="bmiResultLabel">Your body mass index is:</string>
+    <string name="bmiResultLabel2">Your body mass index is: %1$.2f.  You are %2$s.</string>
+    <string name="bmiUnderweight">underweight</string>
+    <string name="bmiNormal">normal weight</string>
+    <string name="bmiOverweight">over weight</string>
+    <string name="bmiObese">obese</string>
+
+    <!-- Loan -->
+    <string name="loanCalculator">Loan Calculator</string>
+    <string name="principalAmountHint">Principal Amount</string>
+    <string name="termHint">Term of Loan (in months)</string>
+    <string name="interestHint">Annual Interest Rate</string>
+    <string name="loanButtonText">Calculate Loan</string>
+    <string name="loanResultLabel">No Result</string>
+    <string name="loanResultLabel2">A loan in the amount of $%1$.2f, at an interest rate of %2$.2f percent, for a term of  %3$d months, results in a monthly payment of $%4$.2f.</string>
+
+    <string-array name="listItems">
+        <item>Tips</item>
+        <item>BMI</item>
+        <item>Loan</item>
+    </string-array>
+</resources>

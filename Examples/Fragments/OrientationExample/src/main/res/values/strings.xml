@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OrientationExample</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="landscape_message">Hi, I am in Landscape mode</string>
+    <string name="portrait_message">Hi, I am in Portrait mode</string>
+</resources>

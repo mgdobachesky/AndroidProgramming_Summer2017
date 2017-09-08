@@ -1,0 +1,2 @@
+include ':app', ':OrientationExample', ':FirstFragment', ':DialogFragmentDemo', 'TwoFragmentExample'
+include ':calculator2'
