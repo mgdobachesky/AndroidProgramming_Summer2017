@@ -41,6 +41,9 @@ public class ImageDetails extends AppCompatActivity {
     String filePath;
     RecognizeImage recognizeImage = new RecognizeImage();
 
+    // Define keys
+    String IMAGE_DETAILS_KEY = "imageDetailsState";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +70,25 @@ public class ImageDetails extends AppCompatActivity {
         Bitmap bitmap = ScaleImage.scaleImage(Uri.parse(filePath), width, height);
         imgImageForDetails.setImageBitmap(bitmap);
 
-        // Set delegate for async task to be this
-        // so the method of this class will run.
-        // Then execute the async task
-        recognizeImage.execute(filePath);
+        if(savedInstanceState == null) {
+            // Set delegate for async task to be this
+            // so the method of this class will run.
+            // Then execute the async task
+            recognizeImage.execute(filePath);
+        }
+
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        lblImageDetails.setText(savedInstanceState.getString(IMAGE_DETAILS_KEY));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(IMAGE_DETAILS_KEY, lblImageDetails.getText().toString());
+
+        super.onSaveInstanceState(outState);
     }
 
     private class RecognizeImage extends AsyncTask<String, Void, Void> {
@@ -99,6 +117,7 @@ public class ImageDetails extends AppCompatActivity {
 
                 ClassifyImagesOptions options = new ClassifyImagesOptions.Builder()
                         .images(picture)
+                        .threshold(0.7)
                         .build();
                 VisualClassification response = service.classify(options).execute();
                 content = response.toString();

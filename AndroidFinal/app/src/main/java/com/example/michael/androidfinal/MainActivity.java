@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements CustomListAdapter
 
     // Initialize static final variables (global)
     private static final int REQUEST_TAKE_PHOTO = 1;
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 10;
 
     // Define controls (global)
     private ListView lstPictures;
@@ -80,7 +81,13 @@ public class MainActivity extends AppCompatActivity implements CustomListAdapter
     private View.OnClickListener takePictureOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            dispatchTakePictureIntent();
+            int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+            if(permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            } else if(permissionCheck == PackageManager.PERMISSION_DENIED) {
+                requestPermission();
+            }
+
         }
     };
 
@@ -91,6 +98,24 @@ public class MainActivity extends AppCompatActivity implements CustomListAdapter
             sendVisualRecognition(getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/" + item);
         }
     };
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch(requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA: {
+                if(grantResults.length  > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    dispatchTakePictureIntent();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Camera permission denied, can not take any pictures.", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
