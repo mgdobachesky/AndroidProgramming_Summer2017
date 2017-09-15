@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LoadingImages.iml" filepath="$PROJECT_DIR$/LoadingImages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UsingImageSwitcher/UsingImageSwitcher.iml" filepath="$PROJECT_DIR$/UsingImageSwitcher/UsingImageSwitcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UsingImageView/UsingImageView.iml" filepath="$PROJECT_DIR$/UsingImageView/UsingImageView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagefromurl/imagefromurl.iml" filepath="$PROJECT_DIR$/imagefromurl/imagefromurl.iml" />
+    </modules>
+  </component>
+</project>
